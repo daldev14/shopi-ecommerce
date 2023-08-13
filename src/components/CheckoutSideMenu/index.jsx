@@ -11,6 +11,9 @@ export default function CheckoutSideMenu() {
     totalProductsInCart,
     isCheckoutSideMenuOpen,
     handlerCloseCheckoutSideMenu,
+    handlerAddCheckoutList,
+    handlerOpenProductDatil,
+    handlerRemoveToCart,
   } = useShoppingCart();
 
   useEffect(() => {
@@ -51,7 +54,18 @@ export default function CheckoutSideMenu() {
           <div className="flex flex-col gap-1">
             {totalProductsInCart ? (
               cart.map((product) => {
-                return <OrderCard key={product.productId} {...product} />;
+                return (
+                  <OrderCard
+                    key={product.productId}
+                    {...product}
+                    handlerClick={() =>
+                      handlerOpenProductDatil({ id: product.productId })
+                    }
+                    handlerRemove={(event) =>
+                      handlerRemoveToCart(event, { id: product.productId })
+                    }
+                  />
+                );
               })
             ) : (
               <p className="text-slate-400 text-center mt-2">
@@ -65,6 +79,7 @@ export default function CheckoutSideMenu() {
             Total: <span>{`$${totalPurchase}`}</span>
           </p>
           <button
+            onClick={() => handlerAddCheckoutList()}
             className={`w-full rounded py-2 bg-black text-white ${
               !totalPurchase ? "bg-black/50" : ""
             }`}
