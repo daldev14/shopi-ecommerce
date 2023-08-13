@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import ShoppingCartContext from "../context/ShoppingCartContext";
+import totalPrice from "../utils/totalPrice";
+import { v4 as uuidv4 } from "uuid";
 
 export default function useShoppingCart() {
   const {
@@ -14,6 +16,8 @@ export default function useShoppingCart() {
     isCheckoutSideMenuOpen,
     openCheckoutSideMenu,
     closeCheckoutSideMenu,
+    orderList,
+    addCheckoutList,
   } = useContext(ShoppingCartContext);
 
   const handlerAddToCart = (event, { id }) => {
@@ -40,6 +44,20 @@ export default function useShoppingCart() {
 
   const handlerCloseCheckoutSideMenu = () => closeCheckoutSideMenu();
 
+  const handlerAddCheckoutList = () => {
+    const date = new Date(Date.now());
+
+    const newOrder = {
+      orderId: uuidv4(),
+      orderDate: date.toLocaleDateString(),
+      products: [...cart],
+      totalProducts: cart.length,
+      totalPrice: totalPrice(cart),
+    };
+
+    addCheckoutList(newOrder);
+  };
+
   return {
     cart,
     handlerAddToCart,
@@ -52,5 +70,7 @@ export default function useShoppingCart() {
     isCheckoutSideMenuOpen,
     handlerOpenCheckoutSideMenu,
     handlerCloseCheckoutSideMenu,
+    orderList,
+    handlerAddCheckoutList,
   };
 }

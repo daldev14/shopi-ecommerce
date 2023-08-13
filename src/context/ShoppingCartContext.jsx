@@ -31,6 +31,9 @@ export function ShoppingCartContextProvider({ children }) {
     categoryName: "",
   });
 
+  // List of orders
+  const [orderList, setOrderList] = useState([]);
+
   // Products
   const { products } = useProducts();
 
@@ -89,6 +92,12 @@ export function ShoppingCartContextProvider({ children }) {
   // Close chekout side menu
   const closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false);
 
+  // Add to order list
+  const addCheckoutList = (newOrder) => {
+    setOrderList([newOrder, ...orderList]);
+    setCart([]);
+  };
+
   useEffect(() => {
     countItemsToCart();
   }, [cart, countItemsToCart]);
@@ -109,6 +118,8 @@ export function ShoppingCartContextProvider({ children }) {
         isCheckoutSideMenuOpen,
         openCheckoutSideMenu,
         closeCheckoutSideMenu,
+        orderList,
+        addCheckoutList,
       }}
     >
       {children}

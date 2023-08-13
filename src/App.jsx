@@ -8,8 +8,8 @@ import SignIn from "./pages/SignIn";
 import RootLayout from "./components/RootLayout";
 import { ProductsContextProvider } from "./context/ProductsContext";
 import { ShoppingCartContextProvider } from "./context/ShoppingCartContext";
-import "./App.css";
 import CheckoutSideMenu from "./components/CheckoutSideMenu";
+import "./App.css";
 
 export default function App() {
   return (
@@ -20,8 +20,8 @@ export default function App() {
             <Route path="/" element={<RootLayout />}>
               <Route index element={<Home />} />
               <Route path="/my-account" element={<MyAccount />} />
-              <Route path="/my-order" element={<MyOrder />} />
               <Route path="/my-orders" element={<MyOrders />} />
+              <Route path="/my-orders/:orderId" element={<MyOrder />} />
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="*" element={<NotFound />} />
             </Route>
