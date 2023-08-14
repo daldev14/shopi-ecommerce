@@ -19,7 +19,7 @@ export function ShoppingCartContextProvider({ children }) {
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
 
   // Checkout side menu · Open/Close
-  const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(true);
+  const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false);
 
   // Product selected
   const [productToShow, setProductToShow] = useState({

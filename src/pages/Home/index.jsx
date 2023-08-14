@@ -1,20 +1,52 @@
-import Card from "../../components/Card";
+import { useMemo, useState } from "react";
 import ProductDetail from "../../components/ProductDetail";
+import Search from "../../components/ProductSearch";
 import useProducts from "../../hooks/useProducts";
+import { useParams } from "react-router-dom";
+import ProductContainer from "../../components/ProductContainer";
 
 export default function Home() {
-  const { products } = useProducts();
+  const { products, isLoading } = useProducts();
+  const [searchText, setSearchText] = useState("");
+  const { idTag = "" } = useParams();
+
+  const searchProduct = useMemo(() => {
+    if (!idTag) {
+      return products.filter((product) =>
+        product.title.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+    return products.filter(
+      (product) =>
+        product.title.toLowerCase().includes(searchText.toLowerCase()) &&
+        product.category.categoryName
+          .toLowerCase()
+          .includes(idTag.toLowerCase())
+    );
+  }, [idTag, products, searchText]);
 
   return (
     <>
-      <h1 className="text-2xl font-bold mb-2">Home</h1>
-      <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {products
-          .map((product) => {
-            return <Card key={product.productId} {...product} />;
-          })
-          .slice(0, 20)}
-      </section>
+      <div className="mb-4">
+        <Search handlerSearch={setSearchText} />
+      </div>
+
+      {!isLoading ? (
+        searchProduct.length ? (
+          <ProductContainer productList={searchProduct} />
+        ) : (
+          <div className="grid place-content-center">
+            <p className="text-3xl text-slate-400 font-semibold">
+              Products not found
+            </p>
+          </div>
+        )
+      ) : (
+        <div className="grid place-content-center">
+          <p className="text-3xl text-slate-400 font-semibold">Loading...</p>
+        </div>
+      )}
       <ProductDetail />
     </>
   );
