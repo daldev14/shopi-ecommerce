@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 
 OrderCard.propTypes = {
-  productId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   images: PropTypes.array.isRequired,
