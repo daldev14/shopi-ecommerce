@@ -3,11 +3,11 @@ import useShoppingCart from "../../hooks/useShoppingCart";
 
 const ItemsNavLeft = [
   { name: "All", href: "/" },
-  { name: "Clothes", href: "/clothes" },
-  { name: "Electronic", href: "/electronic" },
-  { name: "Furniture", href: "/furniture" },
-  { name: "Toys", href: "/toys" },
-  { name: "Others", href: "/others" },
+  { name: "Clothes", href: "/tag/clothes" },
+  { name: "Electronic", href: "/tag/electronic" },
+  { name: "Furniture", href: "/tag/furniture" },
+  { name: "Toys", href: "/tag/toys" },
+  { name: "Others", href: "/tag/others" },
 ];
 
 const ItemsNavRight = [
