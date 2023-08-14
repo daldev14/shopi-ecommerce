@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState, useCallback } from "react";
 import useProducts from "../hooks/useProducts";
 import PropTypes from "prop-types";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 ShoppingCartContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
@@ -10,7 +11,8 @@ const ShoppingCartContext = createContext();
 
 export function ShoppingCartContextProvider({ children }) {
   // Cart status
-  const [cart, setCart] = useState([]);
+  //const [cart, setCart] = useState([]);
+  const [cart, setCart] = useLocalStorage("PRODUCTS_CART_V1");
 
   // Number of products in cart
   const [totalProductsInCart, setTotalProductsInCart] = useState(0);
@@ -32,7 +34,8 @@ export function ShoppingCartContextProvider({ children }) {
   });
 
   // List of orders
-  const [orderList, setOrderList] = useState([]);
+  //const [orderList, setOrderList] = useState([]);
+  const [orderList, setOrderList] = useLocalStorage("ORDER_LIST_V1");
 
   // Products
   const { products } = useProducts();
