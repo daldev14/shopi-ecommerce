@@ -5,7 +5,7 @@ import MyOrder from "./pages/MyOrder";
 import MyOrders from "./pages/MyOrders";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
-import RootLayout from "./components/RootLayout";
+import RootLayout from "./layouts/RootLayout";
 import { ProductsContextProvider } from "./context/ProductsContext";
 import { ShoppingCartContextProvider } from "./context/ShoppingCartContext";
 import CheckoutSideMenu from "./components/CheckoutSideMenu";
@@ -19,6 +19,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<RootLayout />}>
               <Route index element={<Home />} />
+              <Route path="/tag/:idTag" element={<Home />} />
               <Route path="/my-account" element={<MyAccount />} />
               <Route path="/my-orders" element={<MyOrders />} />
               <Route path="/my-orders/:orderId" element={<MyOrder />} />
