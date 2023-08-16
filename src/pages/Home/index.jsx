@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ProductDetail from "../../components/ProductDetail";
 import Search from "../../components/ProductSearch";
 import useProducts from "../../hooks/useProducts";
@@ -9,6 +9,10 @@ export default function Home() {
   const { products, isLoading } = useProducts();
   const [searchText, setSearchText] = useState("");
   const { idTag = "" } = useParams();
+
+  useEffect(() => {
+    if (idTag) setSearchText("");
+  }, [idTag]);
 
   const searchProduct = useMemo(() => {
     if (!idTag) {
@@ -29,7 +33,7 @@ export default function Home() {
   return (
     <>
       <div className="mb-4">
-        <Search handlerSearch={setSearchText} />
+        <Search searchText={searchText} handlerSearch={setSearchText} />
       </div>
 
       {!isLoading ? (

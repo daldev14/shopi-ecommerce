@@ -2,9 +2,10 @@ import PropTypes from "prop-types";
 
 ProducSearch.propTypes = {
   handlerSearch: PropTypes.func.isRequired,
+  searchText: PropTypes.string,
 };
 
-export default function ProducSearch({ handlerSearch }) {
+export default function ProducSearch({ handlerSearch, searchText }) {
   const handlerSubmit = (event) => {
     event.preventDefault();
   };
@@ -14,7 +15,7 @@ export default function ProducSearch({ handlerSearch }) {
   };
 
   return (
-    <div className="bg-white px-2 rounded-md w-full border transition duration-300 hover:shadow-md dark:bg-c-black dark:border-c-accent-black dark:text-white dark:hover:shadow-c-black">
+    <div className="bg-white px-2 rounded-md w-full border transition duration-300 hover:shadow-md">
       <form onSubmit={handlerSubmit} className="w-full">
         <div className="flex items-center gap-3">
           <label htmlFor="todoSearch">
@@ -39,8 +40,9 @@ export default function ProducSearch({ handlerSearch }) {
             type="search"
             name="todoSearch"
             id="todoSearch"
+            value={searchText}
             placeholder="Search product"
-            className="flex-1 focus:outline-none py-3 placeholder-c-gray bg-transparent"
+            className="flex-1 focus:outline-none py-3"
             onChange={handlerChange}
           />
         </div>
